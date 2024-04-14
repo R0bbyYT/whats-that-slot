@@ -17,16 +17,16 @@ public class MouseHandlerMixin {
 
     @Inject(
             method = "onScroll(JDD)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseScrolled(DDD)Z", shift = At.Shift.BEFORE),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;mouseScrolled(DDDD)Z", shift = At.Shift.BEFORE),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true
     )
     private void onMouseScroll(
-            long window, double horizontal, double vertical, CallbackInfo ci,
-            double amount, double mouseX, double mouseY
+            long window, double scrollX, double scrollY, CallbackInfo ci,
+            boolean discreteScroll, double sensitivity, double scaledScrollX, double scaledScrollY, double mouseX, double mouseY
     ) {
         if (this.minecraft.screen instanceof SlotQueryingScreen screen) {
-            if (screen.whats_that_slot$mouseScrolled(amount)) {
+            if (screen.whats_that_slot$mouseScrolled(scaledScrollY)) {
                 ci.cancel();
             }
         }

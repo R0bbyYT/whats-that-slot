@@ -45,7 +45,7 @@ subprojects {
     it.options.release = 17
   }
 
-  tasks.withType(GenerateModuleMetadata) {
+  tasks.withType(GenerateModuleMetadata).configureEach {
     enabled = false
   }
 }

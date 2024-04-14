@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[40,)"
+loaderVersion = "[48,)"
 license = "LGPLv3"
 issueTrackerURL = "https://github.com/Gegy/whats-that-slot"
 
@@ -14,7 +14,7 @@ Utility that highlights which items can be placed in an item slot while holding 
 [[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true
-versionRange = "[47,)"
+versionRange = "[48,)"
 ordering = "NONE"
 side = "BOTH"
 

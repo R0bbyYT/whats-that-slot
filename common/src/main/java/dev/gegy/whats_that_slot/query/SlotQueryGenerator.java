@@ -99,13 +99,7 @@ public final class SlotQueryGenerator {
         }
 
         private void addInventoryMatch(ItemStack item) {
-            item = item.copy();
-
-            if (item.getCount() > 1) {
-                item.setCount(1);
-            }
-
-            this.inventoryMatches.add(item);
+            this.inventoryMatches.add(item.copyWithCount(1));
         }
     }
 

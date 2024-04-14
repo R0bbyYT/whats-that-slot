@@ -41,7 +41,7 @@ public record RecipeItemResults(RegistryAccess registryAccess, RecipeManager rec
             @Override
             protected ItemStack computeNext() {
                 while (recipeIterator.hasNext()) {
-                    var recipe = recipeIterator.next();
+                    var recipe = recipeIterator.next().value();
                     if (recipe.getType() != RecipeItemResults.this.recipeType) {
                         continue;
                     }
