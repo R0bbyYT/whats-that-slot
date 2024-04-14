@@ -14,11 +14,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
     private static final ResourceLocation TEXTURE = new ResourceLocation(WhatsThatSlot.ID, "textures/gui/scrolled_window.png");
+    private static final ResourceLocation SCROLLER_SPRITE = new ResourceLocation("container/creative_inventory/scroller");
+    private static final ResourceLocation SCROLLER_SELECTED_SPRITE = new ResourceLocation("container/creative_inventory/scroller_disabled");
 
     private static final int TEXTURE_WIDTH = 128;
     private static final int TEXTURE_HEIGHT = 128;
@@ -34,9 +35,6 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
 
     public static final int SCROLLER_WIDTH = 10;
     public static final int SCROLLER_HEIGHT = 15;
-    private static final int SCROLLER_U = 117;
-    private static final int SCROLLER_V = 0;
-    private static final int SELECTED_SCROLLER_V = SCROLLER_HEIGHT;
 
     private final SlotQueryActions actions;
     private final SlotQueryItems items;
@@ -78,8 +76,7 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
     private void drawScroller(GuiGraphics graphics) {
         var scroller = this.scrollView.scrollerFromTop(this.scrollbar, this.scrollerBounds);
 
-        int v = this.selectedScroller ? SELECTED_SCROLLER_V : SCROLLER_V;
-        this.blit(graphics, scroller, SCROLLER_U, v);
+        this.blitSprite(graphics, scroller, this.selectedScroller ? SCROLLER_SELECTED_SPRITE : SCROLLER_SPRITE);
     }
 
     @Override
@@ -149,7 +146,7 @@ public final class ScrolledSlotQueryWindow implements SlotQueryWindow {
         return this.items.getHoveredItemAt(x, y);
     }
 
-    private void blit(GuiGraphics graphics, Bounds2i bounds, int u, int v) {
-        graphics.blit(TEXTURE, bounds.x0(), bounds.y0(), SlotQueryPopup.BLIT_OFFSET, u, v, bounds.width(), bounds.height(), TEXTURE_HEIGHT, TEXTURE_WIDTH);
+    private void blitSprite(GuiGraphics graphics, Bounds2i bounds, ResourceLocation sprite) {
+        graphics.blitSprite(sprite, bounds.x0(), bounds.y0(), SlotQueryPopup.BLIT_OFFSET, bounds.width(), bounds.height());
     }
 }
