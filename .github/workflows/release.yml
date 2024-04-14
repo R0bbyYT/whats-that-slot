@@ -62,3 +62,19 @@ jobs:
 
           java: |
             17
+
+      - name: Upload to CurseForge and Modrinth (NeoForge)
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          modrinth-id: 7b5VoITI
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 247895
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          files-primary: forge/build/libs/!(*-@(dev|sources|javadoc)).jar
+          loaders: |
+            neoforge
+
+          java: |
+            17
